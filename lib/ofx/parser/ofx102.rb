@@ -1,3 +1,5 @@
+require "ofx/parser/big_decimal"
+
 module OFX
   module Parser
     class OFX102
@@ -141,7 +143,7 @@ module OFX
       end
 
       def to_decimal(amount)
-        BigDecimal(amount.to_s.gsub(',', '.'))
+        OFX::Parser::BigDecimal.parse(amount)
       end
 
       def set_zero_in_empty(value)

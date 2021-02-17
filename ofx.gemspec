@@ -26,6 +26,7 @@ TXT
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
+  s.add_dependency "bigdecimal", ">= 1.4.0"
   s.add_dependency "nokogiri"
   s.add_development_dependency "rspec", "~> 2.7"
   s.add_development_dependency "rake"
