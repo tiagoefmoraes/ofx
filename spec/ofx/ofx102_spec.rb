@@ -20,6 +20,11 @@ describe OFX::Parser::OFX102 do
       headers["VERSION"].should == "102"
     end
 
+    it "should trim leading whitespace from headers" do
+      headers = OFX::Parser::OFX102.parse_headers("  VERSION:102")
+      headers["VERSION"].should == "102"
+    end
+
     it "should set body" do
       @parser.body.should == @ofx.body
     end

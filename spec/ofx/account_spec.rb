@@ -143,5 +143,17 @@ describe OFX::Account do
         @account.transactions.map(&:amount).should == [BigDecimal('0.11'), BigDecimal('-0.01')]
       end
     end
+
+    context "Original" do
+      before do
+        @ofx = OFX::Parser::Base.new("spec/fixtures/original.ofx")
+        @parser = @ofx.parser
+        @account = @parser.account
+      end
+
+      it "should return transactions" do
+        @account.transactions.map(&:amount).should == [BigDecimal('-118.26')]
+      end
+    end
   end
 end

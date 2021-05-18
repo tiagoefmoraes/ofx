@@ -43,7 +43,7 @@ module OFX
 
         # Parse headers. When value is NONE, convert it to nil.
         headers = header_text.to_enum(:each_line).inject({}) do |memo, line|
-          _, key, value = *line.match(/^(.*?):(.*?)\s*(\r?\n)*$/)
+          _, key, value = *line.match(/^\s*(.*?):(.*?)\s*(\r?\n)*$/)
 
           unless key.nil?
             memo[key] = value == "NONE" ? nil : value
