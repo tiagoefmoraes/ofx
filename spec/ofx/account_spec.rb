@@ -127,5 +127,21 @@ describe OFX::Account do
         end
       end
     end
+
+    context "Inter" do
+      before do
+        @ofx = OFX::Parser::Base.new("spec/fixtures/inter.ofx")
+        @parser = @ofx.parser
+        @account = @parser.account
+      end
+
+      it "should return balance" do
+        @account.balance.amount.should == BigDecimal('3098.97')
+      end
+
+      it "should return transactions" do
+        @account.transactions.map(&:amount).should == [BigDecimal('0.11'), BigDecimal('-0.01')]
+      end
+    end
   end
 end

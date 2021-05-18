@@ -2,12 +2,13 @@ module OFX
   module Parser
     class BigDecimal
       def self.parse(value)
-        BigDecimal(value.to_s.tr(',', '.'))  
+        value = value.to_s.gsub("R$ ", "")
+        BigDecimal(value.tr(',', '.'))
       rescue ArgumentError
         if (value.index(".") < value.index(","))
-          BigDecimal(value.to_s.tr('.', '').tr(',', '.'))      
+          BigDecimal(value.tr('.', '').tr(',', '.'))
         else
-          BigDecimal(value.to_s.tr(',', ''))      
+          BigDecimal(value.tr(',', ''))
         end
       end
     end
